@@ -19,19 +19,19 @@
     </PropertyGroup>
 
     <Target Name="Copy" AfterTargets="Build">
-		<Copy SourceFiles="$(OutputPath)reobfuscated/$(AssemblyName)-$(GameVersion).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" />
-	</Target>
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="$(AmongUsOutput)/BepInEx/plugins/$(AssemblyName)-$(GameVersion).dll" />
+    </Target>
 
-	<ItemGroup>
-		<Reference Include="$(AmongUs)\BepInEx\core\*.dll">
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="$(AmongUs)\BepInEx\unhollowed\*.dll">
-			<Private>false</Private>
-		</Reference>
-		<Reference Remove="$(AmongUs)\BepInEx\unhollowed\netstandard.dll;$(AmongUs)\BepInEx\unhollowed\Newtonsoft.Json.dll" />
+    <ItemGroup>
+        <Reference Include="$(AmongUs)\BepInEx\core\*.dll">
+	    <Private>false</Private>
+        </Reference>
+        <Reference Include="$(AmongUs)\BepInEx\unhollowed\*.dll">
+	    <Private>false</Private>
+        </Reference>
+        <Reference Remove="$(AmongUs)\BepInEx\unhollowed\netstandard.dll;$(AmongUs)\BepInEx\unhollowed\Newtonsoft.Json.dll" />
 
-		<Reference Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
-		<Reference Include="$(AmongUs)\BepInEx\plugins\Essentials-$(GameVersion).dll" />
-	</ItemGroup>
+        <Reference Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
+        <Reference Include="$(AmongUs)\BepInEx\plugins\Essentials-$(GameVersion).dll" />
+    </ItemGroup>
 </Project>
