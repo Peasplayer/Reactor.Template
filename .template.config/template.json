@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Peasplayer",
+  "classifications": [ "Modding", "Among Us", "Reactor" ],
+  "identity": "Peasplayer.Reactor.Template",
+  "name": "Template for an among us mod written in reactor",
+  "shortName": "peasreactortemplate",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}
