@@ -2,29 +2,36 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Version>1.0.0</Version>
-        <Mappings>NuclearPowered/Mappings:0.4.0</Mappings>
+        <Mappings>DaemonBeast/Mappings:0.5.0</Mappings>
 
         <Description>Mod template for Reactor</Description>
-        <Authors>js6pak</Authors>
+        <Authors>Peasplayer</Authors>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(GamePlatform)' == 'Steam'">
-        <GameVersion>2021.4.14s</GameVersion>
+        <GameVersion>2021.5.10s</GameVersion>
         <DefineConstants>$(DefineConstants);STEAM</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(GamePlatform)' == 'Itch'">
-        <GameVersion>2021.4.14i</GameVersion>
+        <GameVersion>2021.5.10i</GameVersion>
         <DefineConstants>$(DefineConstants);ITCH</DefineConstants>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Deobfuscate Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
+    <Target Name="Copy" AfterTargets="Build">
+		<Copy SourceFiles="$(OutputPath)reobfuscated/$(AssemblyName)-$(GameVersion).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" />
+	</Target>
 
-        <PackageReference Include="Reactor.OxygenFilter.MSBuild" Version="0.3.0" />
-    </ItemGroup>
+	<ItemGroup>
+		<Reference Include="$(AmongUs)\BepInEx\core\*.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="$(AmongUs)\BepInEx\unhollowed\*.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Remove="$(AmongUs)\BepInEx\unhollowed\netstandard.dll;$(AmongUs)\BepInEx\unhollowed\Newtonsoft.Json.dll" />
 
-    <Target Name="Copy" AfterTargets="Reobfuscate">
-        <Copy SourceFiles="$(OutputPath)reobfuscated/$(AssemblyName)-$(GameVersion).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" Condition="'$(Configuration)' == 'Debug'" />
-    </Target>
+		<Reference Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
+		<Reference Include="$(AmongUs)\BepInEx\plugins\Essentials-$(GameVersion).dll" />
+	</ItemGroup>
 </Project>
