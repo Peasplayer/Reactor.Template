@@ -4,9 +4,10 @@
   "classifications": [ "Modding", "Among Us", "Reactor" ],
   "identity": "Peasplayer.Reactor.Template",
   "name": "Template for an among us mod written in reactor",
-  "shortName": "peasreactortemplate",
+  "shortName": "peasmod",
   "tags": {
     "language": "C#",
     "type": "project"
-  }
+  },
+  "sourceName": "Reactor.Template"
 }
