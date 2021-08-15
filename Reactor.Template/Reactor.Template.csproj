@@ -5,6 +5,9 @@
         <GameVersion>2021.6.15s</GameVersion>
         <Description>Mod template for Reactor</Description>
         <Authors>Peasplayer</Authors>
+	    
+	<GameVersion Condition="'$(GamePlatform)' == 'Steam'">2021.6.30s</GameVersion>
+        <GameVersion Condition="'$(GamePlatform)' == 'Itch'">2021.6.30i</GameVersion>
     </PropertyGroup>
 
     <Target Name="Copy" AfterTargets="Build">
@@ -12,15 +15,8 @@
     </Target>
 
     <ItemGroup>
-        <Reference Include="$(AmongUs)\BepInEx\core\*.dll">
-	    <Private>false</Private>
-        </Reference>
-        <Reference Include="$(AmongUs)\BepInEx\unhollowed\*.dll">
-	    <Private>false</Private>
-        </Reference>
-        <Reference Remove="$(AmongUs)\BepInEx\unhollowed\netstandard.dll;$(AmongUs)\BepInEx\unhollowed\Newtonsoft.Json.dll" />
-
-        <Reference Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
-        <Reference Include="$(AmongUs)\BepInEx\plugins\Essentials-$(GameVersion).dll" />
+	<PackageReference Include="Peasplayer.Essentials" Version="0.2.0-dev13"/>
+        <PackageReference Include="Reactor" Version="1.0.0-rc.1" />
+        <PackageReference Include="Reactor.MSBuild" Version="0.1.5" PrivateAssets="all" />
     </ItemGroup>
 </Project>
