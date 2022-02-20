@@ -4,33 +4,30 @@ using BepInEx.IL2CPP;
 using HarmonyLib;
 using Reactor;
 
-namespace Reactor.Template
+namespace Reactor.Template;
+
+[BepInAutoPlugin]
+[BepInProcess("Among Us.exe")]
+[BepInDependency(ReactorPlugin.Id)]
+public partial class TemplatePlugin : BasePlugin
 {
-    [BepInPlugin(Id)]
-    [BepInProcess("Among Us.exe")]
-    [BepInDependency(ReactorPlugin.Id)]
-    public class TemplatePlugin : BasePlugin
+    public Harmony Harmony { get; } = new(Id);
+
+    public ConfigEntry<string> ConfigName { get; private set; }
+
+    public override void Load()
     {
-        public const string Id = "me.change.please";
+        ConfigName = Config.Bind("Fake", "Name", ":>");
 
-        public Harmony Harmony { get; } = new Harmony(Id);
+        Harmony.PatchAll();
+    }
 
-        public ConfigEntry<string> Name { get; private set; }
-
-        public override void Load()
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
+    public static class ExamplePatch
+    {
+        public static void Postfix(PlayerControl __instance)
         {
-            Name = Config.Bind("Fake", "Name", ":>");
-
-            Harmony.PatchAll();
-        }
-
-        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
-        public static class ExamplePatch
-        {
-            public static void Postfix(PlayerControl __instance)
-            {
-                __instance.nameText.text = PluginSingleton<TemplatePlugin>.Instance.Name.Value;
-            }
+            __instance.nameText.text = PluginSingleton<TemplatePlugin>.Instance.ConfigName.Value;
         }
     }
 }

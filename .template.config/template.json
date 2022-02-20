@@ -1,13 +1,50 @@
 {
-  "$schema": "http://json.schemastore.org/template",
-  "author": "Peasplayer",
-  "classifications": [ "Modding", "Among Us", "Reactor" ],
-  "identity": "Peasplayer.Reactor.Template",
-  "name": "Template for an among us mod written in reactor",
-  "shortName": "peasmod",
-  "tags": {
-    "language": "C#",
-    "type": "project"
-  },
-  "sourceName": "Reactor.Template"
+    "$schema": "https://json.schemastore.org/template",
+    "author": "NuclearPowered",
+    "classifications": [
+        "Reactor"
+    ],
+    "identity": "Peasplayer.Reactor.Template",
+    "name": "Peasplayer.Reactor.Template",
+    "shortName": "peasplayer.reactor",
+    "tags": {
+        "language": "C#",
+        "type": "solution",
+        "platform": "Among Us"
+    },
+    "sourceName": "Reactor.Template",
+    "preferNameDirectory": true,
+    "symbols": {
+        "pluginName": {
+            "type": "derived",
+            "valueSource": "name",
+            "valueTransform": "ValueAfterLastDot"
+        },
+        "pluginClass": {
+            "type": "generated",
+            "datatype": "string",
+            "generator": "join",
+            "parameters": {
+                "symbols": [
+                    {
+                        "type": "ref",
+                        "value": "pluginName"
+                    },
+                    {
+                        "type": "const",
+                        "value": "Plugin"
+                    }
+                ]
+            },
+            "replaces": "TemplatePlugin",
+            "fileRename": "TemplatePlugin"
+        }
+    },
+    "forms": {
+        "ValueAfterLastDot": {
+            "identifier": "replace",
+            "pattern": "^.*\\.(?=[^\\.]+$)",
+            "replacement": ""
+        }
+    }
 }
